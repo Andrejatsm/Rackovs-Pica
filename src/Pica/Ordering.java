@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -20,8 +21,8 @@ public class Ordering extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
-    private JTextField txtDad;
-    private JTextField textField_1;
+    private JTextField vards;
+    private JTextField adrese;
     private JButton btnNewButton;
 
     public static void main(String[] args) {
@@ -54,15 +55,15 @@ public class Ordering extends JFrame {
         lblNewLabel.setBounds(10, 107, 158, 14);
         contentPane.add(lblNewLabel);
 
-        txtDad = new JTextField();
-        txtDad.setBounds(10, 132, 158, 20);
-        contentPane.add(txtDad);
-        txtDad.setColumns(10);
+        vards = new JTextField();
+        vards.setBounds(10, 132, 158, 20);
+        contentPane.add(vards);
+        vards.setColumns(10);
 
-        textField_1 = new JTextField();
-        textField_1.setBounds(216, 132, 158, 20);
-        contentPane.add(textField_1);
-        textField_1.setColumns(10);
+        adrese = new JTextField();
+        adrese.setBounds(216, 132, 158, 20);
+        contentPane.add(adrese);
+        adrese.setColumns(10);
 
         JLabel lblNewLabel_1 = new JLabel("Adrese:");
         lblNewLabel_1.setBounds(216, 107, 158, 14);
@@ -83,32 +84,30 @@ public class Ordering extends JFrame {
         lblNewLabel_3.setBounds(26, 0, 348, 96);
         contentPane.add(lblNewLabel_3);
 
-        // Add ActionListener to the button
+      
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String name = txtDad.getText().trim();
-                String surname = textField_1.getText().trim();
+                String name = vards.getText().trim();
+                String surname = adrese.getText().trim();
 
-                // Check if name and surname fields are not empty
+                
                 if (!name.isEmpty() && !surname.isEmpty()) {
-                    // Open the Screen frame
+                 
                     Screen screen = new Screen();
                     screen.setVisible(true);
-                    dispose(); // Close the current frame
+                    dispose(); 
                 } else {
-                    // Display a message or perform other actions if fields are empty
-                    // For example:
-                    // JOptionPane.showMessageDialog(Ordering.this, "Please fill in all fields.");
+                    JOptionPane.showMessageDialog(Ordering.this, "Lūdzu, aizpildi visus lodziņus lai pasūtītu.");
                 }
             }
         });
 
-        // Add a listener to check if all fields are filled
-        txtDad.getDocument().addDocumentListener(new CustomDocumentListener());
-        textField_1.getDocument().addDocumentListener(new CustomDocumentListener());
+        // Pārbauda vai visas ailes ir aizpildītas
+        vards.getDocument().addDocumentListener(new CustomDocumentListener());
+        adrese.getDocument().addDocumentListener(new CustomDocumentListener());
     }
 
-    // Custom Document Listener to handle text field changes
+   
     private class CustomDocumentListener implements DocumentListener {
         @Override
         public void insertUpdate(DocumentEvent e) {
@@ -122,15 +121,15 @@ public class Ordering extends JFrame {
 
         @Override
         public void changedUpdate(DocumentEvent e) {
-            // Plain text components don't fire these events
+          
         }
 
         private void checkFields() {
-            String name = txtDad.getText().trim();
-            String surname = textField_1.getText().trim();
+            String name = vards.getText().trim();
+            String street = adrese.getText().trim();
 
-            // Enable the button only if name and surname fields are not empty
-            btnNewButton.setEnabled(!name.isEmpty() && !surname.isEmpty());
+            //Poga darboas tikai tad ja ir izdarīti specifiski prasījumi
+            btnNewButton.setEnabled(!name.isEmpty() && !street.isEmpty() && name.length() >= 3 && street.length() >= 3);
         }
     }
 }
