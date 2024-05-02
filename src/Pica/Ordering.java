@@ -40,8 +40,8 @@ public class Ordering extends JFrame {
 
     public Ordering() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(Ordering.class.getResource("/Pica/pluh.jpg")));
-        setTitle("Ekrans");
-        setBackground(Color.LIGHT_GRAY);
+        setTitle("The Path Of A Belevolent One");
+        setBackground(Color.WHITE);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 410, 281);
         setLocationRelativeTo(null);
