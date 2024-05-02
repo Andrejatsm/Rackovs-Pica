@@ -22,6 +22,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JCheckBox;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
+import javax.swing.JSlider;
 
 public class Screen extends JFrame {
 
@@ -29,6 +30,16 @@ public class Screen extends JFrame {
     private JPanel contentPane;
     private String name;
     private String street;
+    private JComboBox garsa;
+    private JRadioButton maza;
+    private JRadioButton videja;
+    private JRadioButton liela;
+    private JCheckBox exSiers;
+    private JCheckBox chckbxNewCheckBox_1;
+    private JCheckBox chckbxNewCheckBox_2;
+    private JCheckBox chckbxNewCheckBox_3;
+    private JCheckBox chckbxNewCheckBox_1_1;
+    private JCheckBox chckbxNewCheckBox_2_1;
 
     /**
      * Launch the application.
@@ -73,55 +84,55 @@ public class Screen extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
         
-        JLabel lblNewLabel = new JLabel("New label");
+        JLabel lblNewLabel = new JLabel("Picas Veids:");
         lblNewLabel.setBounds(10, 11, 161, 14);
         contentPane.add(lblNewLabel);
         
-        JComboBox comboBox = new JComboBox();
-        comboBox.setBounds(10, 36, 260, 22);
-        contentPane.add(comboBox);
+        garsa = new JComboBox();
+        garsa.setBounds(10, 36, 260, 22);
+        contentPane.add(garsa);
         
-        JLabel lblNewLabel_1 = new JLabel("New label");
-        lblNewLabel_1.setBounds(10, 69, 161, 14);
+        JLabel sad = new JLabel("Izmērs/Cena:");
+        sad.setBounds(10, 69, 161, 14);
+        contentPane.add(sad);
+        
+        maza = new JRadioButton("Mazā - 20cm");
+        maza.setBounds(10, 90, 109, 23);
+        contentPane.add(maza);
+        
+        videja = new JRadioButton("Vidējā - 30cm");
+        videja.setBounds(10, 116, 109, 23);
+        contentPane.add(videja);
+        
+        liela = new JRadioButton("Lielā - 30.5cm");
+        liela.setBounds(10, 142, 109, 23);
+        contentPane.add(liela);
+        
+        JLabel lblNewLabel_1 = new JLabel("Piedevas:");
+        lblNewLabel_1.setBounds(10, 172, 161, 14);
         contentPane.add(lblNewLabel_1);
         
-        JRadioButton rdbtnNewRadioButton = new JRadioButton("New radio button");
-        rdbtnNewRadioButton.setBounds(10, 90, 109, 23);
-        contentPane.add(rdbtnNewRadioButton);
+        exSiers = new JCheckBox("Extra Siers");
+        exSiers.setBounds(10, 193, 97, 23);
+        contentPane.add(exSiers);
         
-        JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("New radio button");
-        rdbtnNewRadioButton_1.setBounds(10, 116, 109, 23);
-        contentPane.add(rdbtnNewRadioButton_1);
-        
-        JRadioButton rdbtnNewRadioButton_2 = new JRadioButton("New radio button");
-        rdbtnNewRadioButton_2.setBounds(10, 142, 109, 23);
-        contentPane.add(rdbtnNewRadioButton_2);
-        
-        JLabel lblNewLabel_1_1 = new JLabel("New label");
-        lblNewLabel_1_1.setBounds(10, 172, 161, 14);
-        contentPane.add(lblNewLabel_1_1);
-        
-        JCheckBox chckbxNewCheckBox = new JCheckBox("New check box");
-        chckbxNewCheckBox.setBounds(10, 193, 97, 23);
-        contentPane.add(chckbxNewCheckBox);
-        
-        JCheckBox chckbxNewCheckBox_1 = new JCheckBox("New check box");
+        chckbxNewCheckBox_1 = new JCheckBox("New check box");
         chckbxNewCheckBox_1.setBounds(10, 219, 97, 23);
         contentPane.add(chckbxNewCheckBox_1);
         
-        JCheckBox chckbxNewCheckBox_2 = new JCheckBox("New check box");
+        chckbxNewCheckBox_2 = new JCheckBox("New check box");
         chckbxNewCheckBox_2.setBounds(10, 245, 97, 23);
         contentPane.add(chckbxNewCheckBox_2);
         
-        JCheckBox chckbxNewCheckBox_3 = new JCheckBox("New check box");
+        chckbxNewCheckBox_3 = new JCheckBox("New check box");
         chckbxNewCheckBox_3.setBounds(109, 193, 97, 23);
         contentPane.add(chckbxNewCheckBox_3);
         
-        JCheckBox chckbxNewCheckBox_1_1 = new JCheckBox("New check box");
+        chckbxNewCheckBox_1_1 = new JCheckBox("New check box");
         chckbxNewCheckBox_1_1.setBounds(109, 219, 97, 23);
         contentPane.add(chckbxNewCheckBox_1_1);
         
-        JCheckBox chckbxNewCheckBox_2_1 = new JCheckBox("New check box");
+        chckbxNewCheckBox_2_1 = new JCheckBox("New check box");
         chckbxNewCheckBox_2_1.setBounds(109, 245, 97, 23);
         contentPane.add(chckbxNewCheckBox_2_1);
         
@@ -159,11 +170,15 @@ public class Screen extends JFrame {
         contentPane.add(btnNewButton_1);
         
         JButton btnNewButton_1_1 = new JButton("New button");
-        btnNewButton_1_1.setBounds(85, 458, 89, 23);
+        btnNewButton_1_1.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
+        btnNewButton_1_1.setBounds(85, 437, 89, 23);
         contentPane.add(btnNewButton_1_1);
         
         JButton btnNewButton_1_1_1 = new JButton("New button");
-        btnNewButton_1_1_1.setBounds(85, 492, 89, 23);
+        btnNewButton_1_1_1.setBounds(85, 471, 89, 23);
         contentPane.add(btnNewButton_1_1_1);
         
         JLabel lblNewLabel_3 = new JLabel("");

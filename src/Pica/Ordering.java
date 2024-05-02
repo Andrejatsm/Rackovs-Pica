@@ -129,7 +129,7 @@ public class Ordering extends JFrame {
             String street = adrese.getText().trim();
 
             //Poga darboas tikai tad ja ir izdarīti specifiski prasījumi
-            btnNewButton.setEnabled(!name.isEmpty() && !street.isEmpty() && name.length() >= 3 && street.length() >= 3);
+            btnNewButton.setEnabled(!name.isEmpty() && !street.isEmpty() && name.length() > 3 && street.length() > 3);
         }
     }
 }
