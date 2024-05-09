@@ -116,24 +116,24 @@ public class Screen extends JFrame {
         exSiers.setBounds(10, 193, 97, 23);
         contentPane.add(exSiers);
         
-        chckbxNewCheckBox_1 = new JCheckBox("New check box");
+        chckbxNewCheckBox_1 = new JCheckBox("Extra Siers");
         chckbxNewCheckBox_1.setBounds(10, 219, 97, 23);
         contentPane.add(chckbxNewCheckBox_1);
         
-        chckbxNewCheckBox_2 = new JCheckBox("New check box");
+        chckbxNewCheckBox_2 = new JCheckBox("Extra Mērce ");
         chckbxNewCheckBox_2.setBounds(10, 245, 97, 23);
         contentPane.add(chckbxNewCheckBox_2);
         
-        chckbxNewCheckBox_3 = new JCheckBox("New check box");
-        chckbxNewCheckBox_3.setBounds(109, 193, 97, 23);
+        chckbxNewCheckBox_3 = new JCheckBox("Dzēriens - Pepsi");
+        chckbxNewCheckBox_3.setBounds(109, 193, 172, 23);
         contentPane.add(chckbxNewCheckBox_3);
         
-        chckbxNewCheckBox_1_1 = new JCheckBox("New check box");
-        chckbxNewCheckBox_1_1.setBounds(109, 219, 97, 23);
+        chckbxNewCheckBox_1_1 = new JCheckBox("Dzēriens - Sprite");
+        chckbxNewCheckBox_1_1.setBounds(109, 219, 183, 23);
         contentPane.add(chckbxNewCheckBox_1_1);
         
-        chckbxNewCheckBox_2_1 = new JCheckBox("New check box");
-        chckbxNewCheckBox_2_1.setBounds(109, 245, 97, 23);
+        chckbxNewCheckBox_2_1 = new JCheckBox("Dzēriens - Fanta");
+        chckbxNewCheckBox_2_1.setBounds(109, 245, 161, 23);
         contentPane.add(chckbxNewCheckBox_2_1);
         
         JLabel lblNewLabel_1_1_1 = new JLabel("New label");
@@ -156,7 +156,8 @@ public class Screen extends JFrame {
         lblNewLabel_1_1_1_1.setBounds(10, 378, 161, 14);
         contentPane.add(lblNewLabel_1_1_1_1);
         
-        JButton btnNewButton = new JButton("New button");
+        JButton btnNewButton = new JButton("+");
+        btnNewButton.setBackground(Color.GREEN);
         btnNewButton.setBounds(30, 403, 61, 23);
         contentPane.add(btnNewButton);
         
@@ -165,11 +166,12 @@ public class Screen extends JFrame {
         lblNewLabel_2.setBounds(109, 407, 46, 14);
         contentPane.add(lblNewLabel_2);
         
-        JButton btnNewButton_1 = new JButton("New button");
+        JButton btnNewButton_1 = new JButton("-");
+        btnNewButton_1.setBackground(Color.RED);
         btnNewButton_1.setBounds(165, 403, 61, 23);
         contentPane.add(btnNewButton_1);
         
-        JButton btnNewButton_1_1 = new JButton("New button");
+        JButton btnNewButton_1_1 = new JButton("Dzēst Izvēli");
         btnNewButton_1_1.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         	}
@@ -177,7 +179,11 @@ public class Screen extends JFrame {
         btnNewButton_1_1.setBounds(85, 437, 89, 23);
         contentPane.add(btnNewButton_1_1);
         
-        JButton btnNewButton_1_1_1 = new JButton("New button");
+        JButton btnNewButton_1_1_1 = new JButton("Čeks");
+        btnNewButton_1_1_1.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
         btnNewButton_1_1_1.setBounds(85, 471, 89, 23);
         contentPane.add(btnNewButton_1_1_1);
         
