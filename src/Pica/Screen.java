@@ -1,26 +1,33 @@
 package Pica;
-import java.awt.EventQueue;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import java.awt.Toolkit;
+
 import java.awt.Color;
-import javax.swing.JMenuBar;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.JLabel;
-import javax.swing.JComboBox;
-import javax.swing.JRadioButton;
-import javax.swing.JCheckBox;
-import javax.swing.SwingConstants;
-import javax.swing.ImageIcon;
+import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.text.DecimalFormat;
+
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+
 
 public class Screen extends JFrame {
 
@@ -42,12 +49,14 @@ public class Screen extends JFrame {
     private JLabel LielaCena;
     private double addOnPrice = 0.00;
     private JLabel lblDaudz;
-    private int qty =1;
+    private int qty = 1;
     private JRadioButton rdoPiegad;
     private JRadioButton rdoPats;
     private final ButtonGroup buttonGroup = new ButtonGroup();
     private final ButtonGroup buttonGroup_1 = new ButtonGroup();
-
+    private JTextArea textArea;
+    private double Kopa;
+    private final ButtonGroup buttonGroup_2 = new ButtonGroup();
     /**
      * Launch the application.
      */
@@ -78,7 +87,7 @@ public class Screen extends JFrame {
         setIconImage(Toolkit.getDefaultToolkit().getImage(Screen.class.getResource("/Pica/pluh.jpg")));
         setTitle("Crimson Moon Shines Bright");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 563, 577);
+        setBounds(100, 100, 1017, 577);
         setLocationRelativeTo(null);
 
         JMenuBar menuBar = new JMenuBar();
@@ -99,12 +108,16 @@ public class Screen extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
+        textArea = new JTextArea(); 
+        textArea.setBounds(541, 23, 439, 482);
+        contentPane.add(textArea); 
+        
         JLabel lblNewLabel = new JLabel("Picas Veids:");
         lblNewLabel.setFont(new Font("Sylfaen", Font.PLAIN, 13));
         lblNewLabel.setBackground(Color.LIGHT_GRAY);
         lblNewLabel.setBounds(10, 11, 161, 22);
         contentPane.add(lblNewLabel);
-
+        
         garsa = new JComboBox<>();
         garsa.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -189,19 +202,38 @@ public class Screen extends JFrame {
         lblNewLabel_1_1_1.setBounds(10, 275, 161, 22);
         contentPane.add(lblNewLabel_1_1_1);
 
-        JRadioButton rdoPiegad = new JRadioButton("Piegāde");
+        rdoPiegad = new JRadioButton("Piegāde");
         buttonGroup_1.add(rdoPiegad);
         rdoPiegad.setFont(new Font("Sylfaen", Font.PLAIN, 13));
         rdoPiegad.setBackground(Color.LIGHT_GRAY);
         rdoPiegad.setBounds(10, 296, 109, 23);
         contentPane.add(rdoPiegad);
 
-        JRadioButton rdoPats = new JRadioButton("Savākšu Pats");
+        rdoPats = new JRadioButton("Savākšu Pats");
         buttonGroup_1.add(rdoPats);
         rdoPats.setFont(new Font("Sylfaen", Font.PLAIN, 13));
         rdoPats.setBackground(Color.LIGHT_GRAY);
         rdoPats.setBounds(10, 322, 109, 23);
         contentPane.add(rdoPats);
+
+
+        ItemListener radioItemListener = new ItemListener() {
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    if (e.getItem() == rdoPiegad) {
+  
+                        rdoPats.setSelected(false);
+                    } else if (e.getItem() == rdoPats) {
+
+                        rdoPiegad.setSelected(false);
+                    }
+                }
+            }
+        };
+
+        // Add the ItemListener to both radio buttons
+        rdoPiegad.addItemListener(radioItemListener);
+        rdoPats.addItemListener(radioItemListener);
 
         JLabel sss = new JLabel("Daudzums:");
         sss.setFont(new Font("Sylfaen", Font.PLAIN, 13));
@@ -211,16 +243,17 @@ public class Screen extends JFrame {
 
         JButton btnNewButton = new JButton("-");
         btnNewButton.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		qty--;
-        		lblDaudz.setText(String.valueOf(qty));
-        	}
+            public void actionPerformed(ActionEvent e) {
+                qty--;
+                lblDaudz.setText(String.valueOf(qty));
+            }
         });
         btnNewButton.setBackground(Color.RED);
         btnNewButton.setBounds(20, 377, 61, 23);
         contentPane.add(btnNewButton);
 
-        JLabel lblDaudz = new JLabel("1");
+        
+        lblDaudz = new JLabel("1"); 
         lblDaudz.setFont(new Font("Tahoma", Font.BOLD, 14));
         lblDaudz.setHorizontalAlignment(SwingConstants.CENTER);
         lblDaudz.setBounds(91, 377, 46, 23);
@@ -248,6 +281,11 @@ public class Screen extends JFrame {
         contentPane.add(btnBill);
 
         JButton btnAgain = new JButton("Dzēst Izvelni");
+        btnAgain.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		sutaAtkal();
+        	}
+        });
         btnAgain.setFont(new Font("Sylfaen", Font.PLAIN, 13));
         btnAgain.setBounds(70, 445, 101, 23);
         contentPane.add(btnAgain);
@@ -259,7 +297,7 @@ public class Screen extends JFrame {
 
         JLabel lblNewLabel_4 = new JLabel("");
         lblNewLabel_4.setIcon(new ImageIcon(Screen.class.getResource("/Pica/maragrita.png")));
-        lblNewLabel_4.setBounds(342, -25, 200, 200);
+        lblNewLabel_4.setBounds(342, 11, 200, 164);
         contentPane.add(lblNewLabel_4);
 
         JLabel lblNewLabel_5 = new JLabel("");
@@ -281,6 +319,16 @@ public class Screen extends JFrame {
         LielaCena.setHorizontalAlignment(SwingConstants.CENTER);
         LielaCena.setBounds(168, 143, 83, 22);
         contentPane.add(LielaCena);
+        
+        JTextArea textArea = new JTextArea();
+        textArea.setBounds(541, 23, 439, 482);
+        contentPane.add(textArea);
+        
+        JLabel lblCeks = new JLabel("Ceks:");
+        lblCeks.setFont(new Font("Sylfaen", Font.PLAIN, 13));
+        lblCeks.setBackground(Color.LIGHT_GRAY);
+        lblCeks.setBounds(541, 0, 161, 22);
+        contentPane.add(lblCeks);
     }
 
     private void loadGarsas() {
@@ -405,24 +453,27 @@ public class Screen extends JFrame {
         
         return Cena;
     }
+    
     private void sutaAtkal() {
-    	
+    	textArea.setText(null);
+    	Kopa = 0;
+    	addOnPrice = 0;
     }
     private void showPasutijumaDetalas() {
-//    	double Kopa = 0;
-//    	int daudzums = Integer.parseInt(lblDaudz.getText());
-//    	
-//    	Kopa = cena() * lblDaudz;
-//    	
-//    	
-//    	txaOrderDetails.setText("\nGarša: \t" +garsa.getSelectedItem()+ "\n\nLielums: \t" + lielumsPica() + "\n\nCena: \t\t" + cenaPica() + "\n\nPiedevas: \t" + addOnPrice() +
-//    	"\n\nServiss: \t" + servicaMetode() + "\n\nDaudzums: \t\t" + "x" + daudzums+ "\n\n*******************************************************************************************************"
-//    	+ "\n\nCena Kopa: \t\t" + Kopa + "Eiro");
-//    	
-//    	
-//    	
-//    	
-//    	
-//    	
+        double Kopa = 0;
+        int daudzums = Integer.parseInt(lblDaudz.getText());
+        Kopa = Cena() * daudzums;
+        
+        DecimalFormat df = new DecimalFormat("#.##");
+        String roundedKopa = df.format(Kopa);
+
+        
+        if (textArea != null) {
+            textArea.setText("\nGarša: \t" +garsa.getSelectedItem()+ "\n\nLielums: \t" + lielumsPica() + "\n\nCena: \t\t" + cenaPica() + "\n\nPiedevas: \t" + addOnPrice() +
+                "\n\nServiss: \t" + servicaMetode() + "\n\nDaudzums: \t\t" + "x" + daudzums+ "\n\n*******************************************************************************************************"
+                + "\n\nCena Kopa: \t\t" + roundedKopa + "Eiro");
+        } else {
+            System.err.println("textArea is null. Cannot display order details.");
+        }
     }
 }
