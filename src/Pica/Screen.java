@@ -1,6 +1,5 @@
 package Pica;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -10,10 +9,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JPopupMenu;
-import java.awt.Component;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JLabel;
@@ -22,24 +17,28 @@ import javax.swing.JRadioButton;
 import javax.swing.JCheckBox;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
-import javax.swing.JSlider;
+import java.awt.Font;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class Screen extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
-    private String name;
-    private String street;
-    private JComboBox garsa;
+    private JComboBox<String> garsa;
     private JRadioButton maza;
     private JRadioButton videja;
     private JRadioButton liela;
     private JCheckBox exSiers;
-    private JCheckBox chckbxNewCheckBox_1;
-    private JCheckBox chckbxNewCheckBox_2;
-    private JCheckBox chckbxNewCheckBox_3;
-    private JCheckBox chckbxNewCheckBox_1_1;
-    private JCheckBox chckbxNewCheckBox_2_1;
+    private JCheckBox exMerce;
+    private JCheckBox exPiedev;
+    private JCheckBox exPepsi;
+    private JCheckBox exFanta;
+    private JCheckBox exSprite;
+    private String[] Garsa = {"Kebaba", "Margarita", "Pepperoni", "Siera", "Studentu"};
+    private JLabel MazaCena;
+    private JLabel VidejaCena;
+    private JLabel LielaCena;
 
     /**
      * Launch the application.
@@ -61,174 +60,235 @@ public class Screen extends JFrame {
      * Create the frame.
      */
     public Screen() {
-    	setBackground(Color.WHITE);
-    	setIconImage(Toolkit.getDefaultToolkit().getImage(Screen.class.getResource("/Pica/pluh.jpg")));
-    	setTitle("Crimson Moon Shines Bright");
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowOpened(WindowEvent e) {
+                loadGarsas();
+            }
+        });
+        setBackground(Color.WHITE);
+        setIconImage(Toolkit.getDefaultToolkit().getImage(Screen.class.getResource("/Pica/pluh.jpg")));
+        setTitle("Crimson Moon Shines Bright");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 563, 577);
         setLocationRelativeTo(null);
-        
+
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
-        
+
         JMenu mnNewMenu = new JMenu("File");
         menuBar.add(mnNewMenu);
-        
+
         JMenuItem mntmNewMenuItem = new JMenuItem("Reset");
         mnNewMenu.add(mntmNewMenuItem);
-        
+
         JMenuItem mntmNewMenuItem_1 = new JMenuItem("Exit");
         mnNewMenu.add(mntmNewMenuItem_1);
+
         contentPane = new JPanel();
+        contentPane.setBackground(Color.GRAY);
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
-        
+
         JLabel lblNewLabel = new JLabel("Picas Veids:");
-        lblNewLabel.setBounds(10, 11, 161, 14);
+        lblNewLabel.setFont(new Font("Sylfaen", Font.PLAIN, 13));
+        lblNewLabel.setBackground(Color.LIGHT_GRAY);
+        lblNewLabel.setBounds(10, 11, 161, 22);
         contentPane.add(lblNewLabel);
-        
-        garsa = new JComboBox();
+
+        garsa = new JComboBox<>();
+        garsa.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                showPrice();
+            }
+        });
         garsa.setBounds(10, 36, 260, 22);
         contentPane.add(garsa);
-        
+
         JLabel sad = new JLabel("Izmērs/Cena:");
-        sad.setBounds(10, 69, 161, 14);
+        sad.setFont(new Font("Sylfaen", Font.PLAIN, 13));
+        sad.setBackground(Color.LIGHT_GRAY);
+        sad.setBounds(10, 69, 161, 22);
         contentPane.add(sad);
-        
+
         maza = new JRadioButton("Mazā - 20cm");
+        maza.setFont(new Font("Sylfaen", Font.PLAIN, 13));
+        maza.setBackground(Color.LIGHT_GRAY);
         maza.setBounds(10, 90, 109, 23);
         contentPane.add(maza);
-        
+
         videja = new JRadioButton("Vidējā - 30cm");
+        videja.setFont(new Font("Sylfaen", Font.PLAIN, 13));
+        videja.setBackground(Color.LIGHT_GRAY);
         videja.setBounds(10, 116, 109, 23);
         contentPane.add(videja);
-        
+
         liela = new JRadioButton("Lielā - 30.5cm");
+        liela.setFont(new Font("Sylfaen", Font.PLAIN, 13));
+        liela.setBackground(Color.LIGHT_GRAY);
         liela.setBounds(10, 142, 109, 23);
         contentPane.add(liela);
-        
+
         JLabel lblNewLabel_1 = new JLabel("Piedevas:");
-        lblNewLabel_1.setBounds(10, 172, 161, 14);
+        lblNewLabel_1.setFont(new Font("Sylfaen", Font.PLAIN, 13));
+        lblNewLabel_1.setBackground(Color.LIGHT_GRAY);
+        lblNewLabel_1.setBounds(10, 172, 161, 23);
         contentPane.add(lblNewLabel_1);
-        
-        exSiers = new JCheckBox("Extra Siers");
-        exSiers.setBounds(10, 193, 97, 23);
+
+        exSiers = new JCheckBox("Extra Siers - 1,30");
+        exSiers.setFont(new Font("Sylfaen", Font.PLAIN, 13));
+        exSiers.setBackground(Color.LIGHT_GRAY);
+        exSiers.setBounds(10, 193, 142, 23);
         contentPane.add(exSiers);
-        
-        chckbxNewCheckBox_1 = new JCheckBox("New check box");
-        chckbxNewCheckBox_1.setBounds(10, 219, 97, 23);
-        contentPane.add(chckbxNewCheckBox_1);
-        
-        chckbxNewCheckBox_2 = new JCheckBox("New check box");
-        chckbxNewCheckBox_2.setBounds(10, 245, 97, 23);
-        contentPane.add(chckbxNewCheckBox_2);
-        
-        chckbxNewCheckBox_3 = new JCheckBox("New check box");
-        chckbxNewCheckBox_3.setBounds(109, 193, 97, 23);
-        contentPane.add(chckbxNewCheckBox_3);
-        
-        chckbxNewCheckBox_1_1 = new JCheckBox("New check box");
-        chckbxNewCheckBox_1_1.setBounds(109, 219, 97, 23);
-        contentPane.add(chckbxNewCheckBox_1_1);
-        
-        chckbxNewCheckBox_2_1 = new JCheckBox("New check box");
-        chckbxNewCheckBox_2_1.setBounds(109, 245, 97, 23);
-        contentPane.add(chckbxNewCheckBox_2_1);
-        
-        JLabel lblNewLabel_1_1_1 = new JLabel("New label");
-        lblNewLabel_1_1_1.setBounds(10, 275, 161, 14);
+
+        exMerce = new JCheckBox("Extra Mērce - 1,00");
+        exMerce.setFont(new Font("Sylfaen", Font.PLAIN, 13));
+        exMerce.setBackground(Color.LIGHT_GRAY);
+        exMerce.setBounds(10, 219, 142, 23);
+        contentPane.add(exMerce);
+
+        exPiedev = new JCheckBox("Extra Piedevas - 1,50");
+        exPiedev.setFont(new Font("Sylfaen", Font.PLAIN, 13));
+        exPiedev.setBackground(Color.LIGHT_GRAY);
+        exPiedev.setBounds(10, 245, 142, 23);
+        contentPane.add(exPiedev);
+
+        exPepsi = new JCheckBox("Pepsi 1L - 1.80");
+        exPepsi.setFont(new Font("Sylfaen", Font.PLAIN, 13));
+        exPepsi.setBackground(Color.LIGHT_GRAY);
+        exPepsi.setBounds(168, 193, 120, 23);
+        contentPane.add(exPepsi);
+
+        exFanta = new JCheckBox("Fanta 1L - 1.80");
+        exFanta.setFont(new Font("Sylfaen", Font.PLAIN, 13));
+        exFanta.setBackground(Color.LIGHT_GRAY);
+        exFanta.setBounds(168, 219, 120, 23);
+        contentPane.add(exFanta);
+
+        exSprite = new JCheckBox("Sprite 1L - 1.80");
+        exSprite.setFont(new Font("Sylfaen", Font.PLAIN, 13));
+        exSprite.setBackground(Color.LIGHT_GRAY);
+        exSprite.setBounds(168, 245, 120, 23);
+        contentPane.add(exSprite);
+
+        JLabel lblNewLabel_1_1_1 = new JLabel("Izvēlies:");
+        lblNewLabel_1_1_1.setFont(new Font("Sylfaen", Font.PLAIN, 13));
+        lblNewLabel_1_1_1.setBackground(Color.LIGHT_GRAY);
+        lblNewLabel_1_1_1.setBounds(10, 275, 161, 22);
         contentPane.add(lblNewLabel_1_1_1);
-        
-        JRadioButton rdbtnNewRadioButton_3 = new JRadioButton("New radio button");
-        rdbtnNewRadioButton_3.setBounds(10, 296, 109, 23);
-        contentPane.add(rdbtnNewRadioButton_3);
-        
-        JRadioButton rdbtnNewRadioButton_1_1 = new JRadioButton("New radio button");
-        rdbtnNewRadioButton_1_1.setBounds(10, 322, 109, 23);
-        contentPane.add(rdbtnNewRadioButton_1_1);
-        
-        JRadioButton rdbtnNewRadioButton_2_1 = new JRadioButton("New radio button");
-        rdbtnNewRadioButton_2_1.setBounds(10, 348, 109, 23);
-        contentPane.add(rdbtnNewRadioButton_2_1);
-        
-        JLabel lblNewLabel_1_1_1_1 = new JLabel("New label");
-        lblNewLabel_1_1_1_1.setBounds(10, 378, 161, 14);
-        contentPane.add(lblNewLabel_1_1_1_1);
-        
-        JButton btnNewButton = new JButton("New button");
-        btnNewButton.setBounds(30, 403, 61, 23);
+
+        JRadioButton rdoPiegad = new JRadioButton("Piegāde");
+        rdoPiegad.setFont(new Font("Sylfaen", Font.PLAIN, 13));
+        rdoPiegad.setBackground(Color.LIGHT_GRAY);
+        rdoPiegad.setBounds(10, 296, 109, 23);
+        contentPane.add(rdoPiegad);
+
+        JRadioButton rdoPats = new JRadioButton("Savākšu Pats");
+        rdoPats.setFont(new Font("Sylfaen", Font.PLAIN, 13));
+        rdoPats.setBackground(Color.LIGHT_GRAY);
+        rdoPats.setBounds(10, 322, 109, 23);
+        contentPane.add(rdoPats);
+
+        JLabel sss = new JLabel("Daudzums:");
+        sss.setFont(new Font("Sylfaen", Font.PLAIN, 13));
+        sss.setBackground(Color.LIGHT_GRAY);
+        sss.setBounds(10, 352, 161, 22);
+        contentPane.add(sss);
+
+        JButton btnNewButton = new JButton("-");
+        btnNewButton.setBackground(Color.RED);
+        btnNewButton.setBounds(20, 377, 61, 23);
         contentPane.add(btnNewButton);
-        
+
         JLabel lblNewLabel_2 = new JLabel("1");
+        lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 14));
         lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-        lblNewLabel_2.setBounds(109, 407, 46, 14);
+        lblNewLabel_2.setBounds(91, 377, 46, 23);
         contentPane.add(lblNewLabel_2);
-        
-        JButton btnNewButton_1 = new JButton("New button");
-        btnNewButton_1.setBounds(165, 403, 61, 23);
+
+        JButton btnNewButton_1 = new JButton("+");
+        btnNewButton_1.setBackground(Color.GREEN);
+        btnNewButton_1.setBounds(147, 377, 61, 23);
         contentPane.add(btnNewButton_1);
-        
-        JButton btnNewButton_1_1 = new JButton("New button");
-        btnNewButton_1_1.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        	}
+
+        JButton btnBill = new JButton("Apstiprināt");
+        btnBill.setFont(new Font("Sylfaen", Font.PLAIN, 13));
+        btnBill.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Add the confirm action here
+            }
         });
-        btnNewButton_1_1.setBounds(85, 437, 89, 23);
-        contentPane.add(btnNewButton_1_1);
-        
-        JButton btnNewButton_1_1_1 = new JButton("New button");
-        btnNewButton_1_1_1.setBounds(85, 471, 89, 23);
-        contentPane.add(btnNewButton_1_1_1);
-        
+        btnBill.setBounds(70, 411, 101, 23);
+        contentPane.add(btnBill);
+
+        JButton btnAgain = new JButton("Dzēst Izvelni");
+        btnAgain.setFont(new Font("Sylfaen", Font.PLAIN, 13));
+        btnAgain.setBounds(70, 445, 101, 23);
+        contentPane.add(btnAgain);
+
         JLabel lblNewLabel_3 = new JLabel("");
         lblNewLabel_3.setIcon(new ImageIcon(Screen.class.getResource("/Pica/sāpes.png")));
         lblNewLabel_3.setBounds(342, 322, 200, 200);
         contentPane.add(lblNewLabel_3);
-        
+
         JLabel lblNewLabel_4 = new JLabel("");
         lblNewLabel_4.setIcon(new ImageIcon(Screen.class.getResource("/Pica/maragrita.png")));
         lblNewLabel_4.setBounds(342, -25, 200, 200);
         contentPane.add(lblNewLabel_4);
-        
+
         JLabel lblNewLabel_5 = new JLabel("");
         lblNewLabel_5.setIcon(new ImageIcon(Screen.class.getResource("/Pica/siers.png")));
         lblNewLabel_5.setBounds(342, 142, 200, 200);
         contentPane.add(lblNewLabel_5);
+
+        MazaCena = new JLabel("");
+        MazaCena.setHorizontalAlignment(SwingConstants.CENTER);
+        MazaCena.setBounds(168, 91, 83, 22);
+        contentPane.add(MazaCena);
+
+        VidejaCena = new JLabel("");
+        VidejaCena.setHorizontalAlignment(SwingConstants.CENTER);
+        VidejaCena.setBounds(168, 117, 83, 22);
+        contentPane.add(VidejaCena);
+
+        LielaCena = new JLabel("");
+        LielaCena.setHorizontalAlignment(SwingConstants.CENTER);
+        LielaCena.setBounds(168, 143, 83, 22);
+        contentPane.add(LielaCena);
     }
 
-    /**
-     * Create the frame with provided name and street information.
-     */
-    public Screen(String name, String street) {
-        this(); // Call default constructor to set up the frame
-        this.name = name;
-        this.street = street;
+    private void loadGarsas() {
+        for (String garsaName : Garsa) {
+            garsa.addItem(garsaName);
+        }
     }
 
-    // Geteri prieks varda un adreses
-    public String getName() {
-        return name;
+    private void showPrice() {
+        if (garsa.getSelectedIndex() == 0) {
+            MazaCena.setText("5,60");
+            VidejaCena.setText("6,60");
+            LielaCena.setText("7,60");
+        } else if (garsa.getSelectedIndex() == 1) {
+            MazaCena.setText("6,80");
+            VidejaCena.setText("7,80");
+            LielaCena.setText("8,80");
+        } else if (garsa.getSelectedIndex() == 2) {
+            MazaCena.setText("4,80");
+            VidejaCena.setText("5,80");
+            LielaCena.setText("6,80");
+        } else if (garsa.getSelectedIndex() == 3) {
+            MazaCena.setText("9,40");
+            VidejaCena.setText("10,40");
+            LielaCena.setText("11,40");
+        } else if (garsa.getSelectedIndex() == 4) {
+            MazaCena.setText("4,20");
+            VidejaCena.setText("5,20");
+            LielaCena.setText("6,20");
+        } else {
+            MazaCena.setText("6,30");
+            VidejaCena.setText("7,30");
+            LielaCena.setText("8,30");
+        }
     }
-
-    public String getStreet() {
-        return street;
-    }
-	private static void addPopup(Component component, final JPopupMenu popup) {
-		component.addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
-			}
-			public void mouseReleased(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
-			}
-			private void showMenu(MouseEvent e) {
-				popup.show(e.getComponent(), e.getX(), e.getY());
-			}
-		});
-	}
 }
