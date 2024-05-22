@@ -40,6 +40,10 @@ public class Screen extends JFrame {
     private JLabel VidejaCena;
     private JLabel LielaCena;
     private double addOnPrice = 0.00;
+    private JLabel lblDaudz;
+    private int qty =1;
+    private JRadioButton rdoPiegad;
+    private JRadioButton rdoPats;
 
     /**
      * Launch the application.
@@ -198,17 +202,29 @@ public class Screen extends JFrame {
         contentPane.add(sss);
 
         JButton btnNewButton = new JButton("-");
+        btnNewButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		qty--;
+        		lblDaudz.setText(String.valueOf(qty));
+        	}
+        });
         btnNewButton.setBackground(Color.RED);
         btnNewButton.setBounds(20, 377, 61, 23);
         contentPane.add(btnNewButton);
 
-        JLabel lblNewLabel_2 = new JLabel("1");
-        lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 14));
-        lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-        lblNewLabel_2.setBounds(91, 377, 46, 23);
-        contentPane.add(lblNewLabel_2);
+        JLabel lblDaudz = new JLabel("1");
+        lblDaudz.setFont(new Font("Tahoma", Font.BOLD, 14));
+        lblDaudz.setHorizontalAlignment(SwingConstants.CENTER);
+        lblDaudz.setBounds(91, 377, 46, 23);
+        contentPane.add(lblDaudz);
 
         JButton btnNewButton_1 = new JButton("+");
+        btnNewButton_1.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		qty++;
+        		lblDaudz.setText(String.valueOf(qty));
+        	}
+        });
         btnNewButton_1.setBackground(Color.GREEN);
         btnNewButton_1.setBounds(147, 377, 61, 23);
         contentPane.add(btnNewButton_1);
@@ -217,7 +233,7 @@ public class Screen extends JFrame {
         btnBill.setFont(new Font("Sylfaen", Font.PLAIN, 13));
         btnBill.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Add the confirm action here
+            	showPasutijumaDetalas();
             }
         });
         btnBill.setBounds(70, 411, 101, 23);
@@ -341,17 +357,59 @@ public class Screen extends JFrame {
 		return size;
     }
     private double cenaPica() {
-    	double picaCena = 0;
-    	if(maza.isSelected())
-    		picaCena = Double.parseDouble(MazaCena.getText());
-    	else if (videja.isSelected())
-    		picaCena = Double.parseDouble(VidejaCena.getText());
-    	else 
-    		picaCena = Double.parseDouble(LielaCena.getText());
-    	return picaCena;
+        double picaCena = 0;
+        String priceText = "";
+        if(maza.isSelected()) {
+            priceText = MazaCena.getText();
+        } else if (videja.isSelected()) {
+            priceText = VidejaCena.getText();
+        } else {
+            priceText = LielaCena.getText();
+        }
+        
+        // Maina komatu uz punktu lai darbotos
+        priceText = priceText.replace(',', '.');
+        
+        picaCena = Double.parseDouble(priceText);
+        return picaCena;
+    }
+    private String servicaMetode() {
+    String serviss = "";
+    if(rdoPiegad.isSelected())
+    	serviss = "Piegade";
+    else if(rdoPats.isSelected())
+    	serviss = "Savaksu pats";
+    return serviss;
+    }
+    private double servicaCena() {
+    	double servicaCena = 0;
+    	if(rdoPiegad.isSelected())
+    		servicaCena = 1.40;
+    	else if(rdoPats.isSelected())
+		servicaCena = 0.00;
+    	
+    	return servicaCena;
+    }
+    private double Cena() {
+        double Cena = 0;
+        
+        Cena = addOnPrice + cenaPica() + servicaCena();
+        
+        return Cena;
+    }
+    private void sutaAtkal() {
+    	
     }
     private void showPasutijumaDetalas() {
-//    	txaOrderDetails.setText("\nGarša: \t" +garsa.getSelectedItem()+ "\n\nLielums: \t" + lielumsPica() + "\n\nCena: \t");
+//    	double Kopa = 0;
+//    	int daudzums = Integer.parseInt(lblDaudz.getText());
+//    	
+//    	Kopa = cena() * lblDaudz;
+//    	
+//    	
+//    	txaOrderDetails.setText("\nGarša: \t" +garsa.getSelectedItem()+ "\n\nLielums: \t" + lielumsPica() + "\n\nCena: \t\t" + cenaPica() + "\n\nPiedevas: \t" + addOnPrice() +
+//    	"\n\nServiss: \t" + servicaMetode() + "\n\nDaudzums: \t\t" + "x" + daudzums+ "\n\n*******************************************************************************************************"
+//    	+ "\n\nCena Kopa: \t\t" + Kopa + "Eiro");
 //    	
 //    	
 //    	
