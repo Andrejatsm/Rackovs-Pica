@@ -20,6 +20,7 @@ import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.ButtonGroup;
 
 public class Screen extends JFrame {
 
@@ -44,6 +45,8 @@ public class Screen extends JFrame {
     private int qty =1;
     private JRadioButton rdoPiegad;
     private JRadioButton rdoPats;
+    private final ButtonGroup buttonGroup = new ButtonGroup();
+    private final ButtonGroup buttonGroup_1 = new ButtonGroup();
 
     /**
      * Launch the application.
@@ -118,18 +121,21 @@ public class Screen extends JFrame {
         contentPane.add(sad);
 
         maza = new JRadioButton("Mazā - 20cm");
+        buttonGroup.add(maza);
         maza.setFont(new Font("Sylfaen", Font.PLAIN, 13));
         maza.setBackground(Color.LIGHT_GRAY);
         maza.setBounds(10, 90, 109, 23);
         contentPane.add(maza);
 
         videja = new JRadioButton("Vidējā - 30cm");
+        buttonGroup.add(videja);
         videja.setFont(new Font("Sylfaen", Font.PLAIN, 13));
         videja.setBackground(Color.LIGHT_GRAY);
         videja.setBounds(10, 116, 109, 23);
         contentPane.add(videja);
 
         liela = new JRadioButton("Lielā - 30.5cm");
+        buttonGroup.add(liela);
         liela.setFont(new Font("Sylfaen", Font.PLAIN, 13));
         liela.setBackground(Color.LIGHT_GRAY);
         liela.setBounds(10, 142, 109, 23);
@@ -184,12 +190,14 @@ public class Screen extends JFrame {
         contentPane.add(lblNewLabel_1_1_1);
 
         JRadioButton rdoPiegad = new JRadioButton("Piegāde");
+        buttonGroup_1.add(rdoPiegad);
         rdoPiegad.setFont(new Font("Sylfaen", Font.PLAIN, 13));
         rdoPiegad.setBackground(Color.LIGHT_GRAY);
         rdoPiegad.setBounds(10, 296, 109, 23);
         contentPane.add(rdoPiegad);
 
         JRadioButton rdoPats = new JRadioButton("Savākšu Pats");
+        buttonGroup_1.add(rdoPats);
         rdoPats.setFont(new Font("Sylfaen", Font.PLAIN, 13));
         rdoPats.setBackground(Color.LIGHT_GRAY);
         rdoPats.setBounds(10, 322, 109, 23);
