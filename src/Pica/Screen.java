@@ -39,6 +39,7 @@ public class Screen extends JFrame {
     private JLabel MazaCena;
     private JLabel VidejaCena;
     private JLabel LielaCena;
+    private double addOnPrice = 0.00;
 
     /**
      * Launch the application.
@@ -290,5 +291,72 @@ public class Screen extends JFrame {
             VidejaCena.setText("7,30");
             LielaCena.setText("8,30");
         }
+    }
+    private String addOnPrice() {
+    	String addOns = "";
+    	
+    	if(exSiers.isSelected())
+    	{
+    		addOnPrice += 1.30;
+    		addOns = addOns + "\n\t" + exSiers.getText() + "\t\t" + "1.30";
+    	}
+    	if(exMerce.isSelected())
+    	{
+    		addOnPrice += 1.00;
+    		addOns = addOns + "\n\t" + exMerce.getText() + "\t\t" + "1.00";
+    	}
+    	if(exPiedev.isSelected())
+    	{
+    		addOnPrice += 1.50;
+    		addOns = addOns + "\n\t" + exPiedev.getText() + "\t\t" + "1.50";
+    	}
+    	if(exPepsi.isSelected())
+    	{
+    		addOnPrice += 1.80;
+    		addOns = addOns + "\n\t" + exPepsi.getText() + "\t\t" + "1.80";
+    	}
+    	if(exFanta.isSelected())
+    	{
+    		addOnPrice += 1.80;
+    		addOns = addOns + "\n\t" + exFanta.getText() + "\t\t" + "1.80";
+    	}
+    	if(exSprite.isSelected())
+    	{
+    		addOnPrice += 1.80;
+    		addOns = addOns + "\n\t" + exSprite.getText() + "\t\t" + "1.80";
+    	}
+    	
+    	return addOns;
+    }
+    private String lielumsPica() {
+    
+    	String size = "";
+    	if(maza.isSelected())
+    		size = maza.getText();
+    	else if (videja.isSelected())
+    		size = videja.getText();
+    	else
+    		size = liela.getText();
+    	
+		return size;
+    }
+    private double cenaPica() {
+    	double picaCena = 0;
+    	if(maza.isSelected())
+    		picaCena = Double.parseDouble(MazaCena.getText());
+    	else if (videja.isSelected())
+    		picaCena = Double.parseDouble(VidejaCena.getText());
+    	else 
+    		picaCena = Double.parseDouble(LielaCena.getText());
+    	return picaCena;
+    }
+    private void showPasutijumaDetalas() {
+//    	txaOrderDetails.setText("\nGarša: \t" +garsa.getSelectedItem()+ "\n\nLielums: \t" + lielumsPica() + "\n\nCena: \t");
+//    	
+//    	
+//    	
+//    	
+//    	
+//    	
     }
 }
