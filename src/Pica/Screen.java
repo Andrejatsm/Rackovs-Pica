@@ -53,7 +53,6 @@ public class Screen extends JFrame {
     private JLabel MazaCena;
     private JLabel VidejaCena;
     private JLabel LielaCena;
-    private double addOnPrice = 0.00;
     private JLabel lblDaudz;
     private int qty = 1;
     private JRadioButton rdoPiegad;
@@ -61,9 +60,6 @@ public class Screen extends JFrame {
     private final ButtonGroup buttonGroup = new ButtonGroup();
     private final ButtonGroup buttonGroup_1 = new ButtonGroup();
     private JTextArea textArea;
-    private double Kopa;
-    
-    
     static void saglabat(String textArea) {
         try {
             FileWriter fw = new FileWriter("Ceks.txt", true);
@@ -137,8 +133,6 @@ public class Screen extends JFrame {
         mntmNewMenuItem.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		textArea.setText(null);
-            	Kopa = 0;
-            	addOnPrice = 0;
         	}
         });
         mnNewMenu.add(mntmNewMenuItem);
@@ -496,8 +490,6 @@ public class Screen extends JFrame {
     
     private void sutaAtkal() {
     	textArea.setText(null);
-    	Kopa = 0;
-    	addOnPrice = 0;
     }
     private void showPasutijumaDetalas() {
         double Kopa = 0;
