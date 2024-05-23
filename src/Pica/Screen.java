@@ -10,6 +10,11 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.DecimalFormat;
 
 import javax.swing.ButtonGroup;
@@ -22,6 +27,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
@@ -56,7 +62,38 @@ public class Screen extends JFrame {
     private final ButtonGroup buttonGroup_1 = new ButtonGroup();
     private JTextArea textArea;
     private double Kopa;
-    private final ButtonGroup buttonGroup_2 = new ButtonGroup();
+    
+    
+    static void saglabat(String textArea) {
+        try {
+            FileWriter fw = new FileWriter("Ceks.txt", true);
+            PrintWriter pw = new PrintWriter(fw);
+            pw.println(textArea);
+            pw.close();
+            JOptionPane.showMessageDialog(null, "Ceks saglabāts failā Ceks.txt", "Paziņojums", JOptionPane.INFORMATION_MESSAGE);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Radās kļūda saglabājot failā! ", "Kļūda", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    static String nolasit() {
+        StringBuilder content = new StringBuilder();
+        try {
+            FileReader fr = new FileReader("Ceks.txt");
+            BufferedReader br = new BufferedReader(fr);
+            String line;
+            while ((line = br.readLine()) != null) {
+                content.append(line).append("\n");
+            }
+            br.close();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Kļūda nolasot failu!", "Kļūda", JOptionPane.ERROR_MESSAGE);
+        }
+        return content.toString();
+    
+    }
+    
+    
     /**
      * Launch the application.
      */
@@ -97,9 +134,21 @@ public class Screen extends JFrame {
         menuBar.add(mnNewMenu);
 
         JMenuItem mntmNewMenuItem = new JMenuItem("Reset");
+        mntmNewMenuItem.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		textArea.setText(null);
+            	Kopa = 0;
+            	addOnPrice = 0;
+        	}
+        });
         mnNewMenu.add(mntmNewMenuItem);
 
         JMenuItem mntmNewMenuItem_1 = new JMenuItem("Exit");
+        mntmNewMenuItem_1.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		System.exit(0);
+        	}
+        });
         mnNewMenu.add(mntmNewMenuItem_1);
 
         contentPane = new JPanel();
@@ -472,8 +521,6 @@ public class Screen extends JFrame {
             textArea.setText("\nGarša: \t" +garsa.getSelectedItem()+ "\n\nLielums: \t" + lielumsPica() + "\n\nCena: \t\t" + cenaPica() + "\n\nPiedevas: \t" + addOnPrice() +
                 "\n\nServiss: \t" + servicaMetode() + "\n\nDaudzums: \t\t" + "x" + daudzums+ "\n\n*******************************************************************************************************"
                 + "\n\nCena Kopa: \t\t" + roundedKopa + "Eiro");
-        } else {
-            System.err.println("textArea is null. Cannot display order details.");
         }
     }
 }
