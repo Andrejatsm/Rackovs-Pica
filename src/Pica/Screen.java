@@ -77,19 +77,19 @@ public class Screen extends JFrame {
     }
 
     static String nolasit() {
-        StringBuilder content = new StringBuilder();
+        StringBuilder textArea = new StringBuilder();
         try {
             FileReader fr = new FileReader("Ceks.txt");
             BufferedReader br = new BufferedReader(fr);
             String line;
             while ((line = br.readLine()) != null) {
-                content.append(line).append("\n");
+                textArea.append(line).append("\n");
             }
             br.close();
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Kļūda nolasot failu!", "Kļūda", JOptionPane.ERROR_MESSAGE);
         }
-        return content.toString();
+        return textArea.toString();
     
     }
     
@@ -413,41 +413,29 @@ public class Screen extends JFrame {
             LielaCena.setText("8,30");
         }
     }
-    private String addOnPrice() {
-    	String addOns = "";
-    	
-    	if(exSiers.isSelected())
-    	{
-    		addOnPrice += 1.30;
-    		addOns = addOns + "\n\t" + exSiers.getText() + "\t\t" + "1.30";
-    	}
-    	if(exMerce.isSelected())
-    	{
-    		addOnPrice += 1.00;
-    		addOns = addOns + "\n\t" + exMerce.getText() + "\t\t" + "1.00";
-    	}
-    	if(exPiedev.isSelected())
-    	{
-    		addOnPrice += 1.50;
-    		addOns = addOns + "\n\t" + exPiedev.getText() + "\t\t" + "1.50";
-    	}
-    	if(exPepsi.isSelected())
-    	{
-    		addOnPrice += 1.80;
-    		addOns = addOns + "\n\t" + exPepsi.getText() + "\t\t" + "1.80";
-    	}
-    	if(exFanta.isSelected())
-    	{
-    		addOnPrice += 1.80;
-    		addOns = addOns + "\n\t" + exFanta.getText() + "\t\t" + "1.80";
-    	}
-    	if(exSprite.isSelected())
-    	{
-    		addOnPrice += 1.80;
-    		addOns = addOns + "\n\t" + exSprite.getText() + "\t\t" + "1.80";
-    	}
-    	
-    	return addOns;
+    private double addOnPrice() {
+        double addOnPrice = 0.00;
+
+        if (exSiers.isSelected()) {
+            addOnPrice += 1.30;
+        }
+        if (exMerce.isSelected()) {
+            addOnPrice += 1.00;
+        }
+        if (exPiedev.isSelected()) {
+            addOnPrice += 1.50;
+        }
+        if (exPepsi.isSelected()) {
+            addOnPrice += 1.80;
+        }
+        if (exFanta.isSelected()) {
+            addOnPrice += 1.80;
+        }
+        if (exSprite.isSelected()) {
+            addOnPrice += 1.80;
+        }
+
+        return addOnPrice;
     }
     private String lielumsPica() {
     
@@ -496,10 +484,13 @@ public class Screen extends JFrame {
     	return servicaCena;
     }
     private double Cena() {
-        double Cena = 0;
+    	double picaCena = cenaPica(); 
+        double servicaCena = servicaCena(); 
         
-        Cena = addOnPrice + cenaPica() + servicaCena();
-        
+        double addOnPrice = addOnPrice();
+
+        double Cena = picaCena + servicaCena + addOnPrice;
+
         return Cena;
     }
     
