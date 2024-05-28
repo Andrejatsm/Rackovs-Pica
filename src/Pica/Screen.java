@@ -60,6 +60,7 @@ public class Screen extends JFrame {
     private final ButtonGroup buttonGroup = new ButtonGroup();
     private final ButtonGroup buttonGroup_1 = new ButtonGroup();
     private JTextArea textArea;
+    
     static void saglabat(String textArea) {
         try {
             FileWriter fw = new FileWriter("Ceks.txt", true);
@@ -287,8 +288,12 @@ public class Screen extends JFrame {
         JButton btnNewButton = new JButton("-");
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                qty--;
-                lblDaudz.setText(String.valueOf(qty));
+            	do {
+            	    if (qty > 0) {
+            	        qty--;
+            	    }
+            	    lblDaudz.setText(String.valueOf(qty));
+            	} while (qty > 0);
             }
         });
         btnNewButton.setBackground(Color.RED);
@@ -463,7 +468,7 @@ public class Screen extends JFrame {
     private String servicaMetode() {
     String serviss = "";
     if(rdoPiegad.isSelected())
-    	serviss = "Piegade";
+    	serviss = "Piegade " + "- 1.40";
     else if(rdoPats.isSelected())
     	serviss = "Savaksu pats";
     return serviss;
