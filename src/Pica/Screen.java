@@ -497,6 +497,20 @@ public class Screen extends JFrame {
     	textArea.setText(null);
     }
     private void showPasutijumaDetalas() {
+        if (garsa.getSelectedIndex() == -1) {
+            JOptionPane.showMessageDialog(null, "Lūdzu, izvēlieties picas veidu!", "Kļūda", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        if (!maza.isSelected() && !videja.isSelected() && !liela.isSelected()) {
+            JOptionPane.showMessageDialog(null, "Lūdzu, izvēlieties picas izmēru!", "Kļūda", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (!rdoPiegad.isSelected() && !rdoPats.isSelected()) {
+            JOptionPane.showMessageDialog(null, "Lūdzu, izvēlieties piegādes metodi!", "Kļūda", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         double Kopa = 0;
         int daudzums = Integer.parseInt(lblDaudz.getText());
         Kopa = Cena() * daudzums;
@@ -504,11 +518,11 @@ public class Screen extends JFrame {
         DecimalFormat df = new DecimalFormat("#.##");
         String roundedKopa = df.format(Kopa);
 
-        
         if (textArea != null) {
-            textArea.setText("\nGarša: \t" +garsa.getSelectedItem()+ "\n\nLielums: \t" + lielumsPica() + "\n\nCena: \t\t" + cenaPica() + "\n\nPiedevas: \t" + addOnPrice() +
-                "\n\nServiss: \t" + servicaMetode() + "\n\nDaudzums: \t\t" + "x" + daudzums+ "\n\n*******************************************************************************************************"
-                + "\n\nCena Kopa: \t\t" + roundedKopa + "Eiro");
+            textArea.setText("\nGarša: \t" + garsa.getSelectedItem() + "\n\nLielums: \t" + lielumsPica() + "\n\nCena: \t\t" + cenaPica() + "\n\nPiedevas: \t" + addOnPrice() +
+                "\n\nServiss: \t" + servicaMetode() + "\n\nDaudzums: \t\t" + "x" + daudzums + "\n\n*******************************************************************************************************" +
+                "\n\nCena Kopa: \t\t" + roundedKopa + " Eiro");
         }
     }
+
 }
