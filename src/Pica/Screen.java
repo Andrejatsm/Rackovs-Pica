@@ -16,6 +16,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -52,7 +53,7 @@ public class Screen extends JFrame {
     private String[] Garsa = {"Kebaba", "Margarita", "Pepperoni", "Siera", "Studentu"};
     private JLabel MazaCena;
     private JLabel VidejaCena;
-    private JLabel LielaCena;
+    private JLabel LielaCena; 
     private JLabel lblDaudz;
     private int qty = 1;
     private JRadioButton rdoPiegad;
@@ -60,6 +61,7 @@ public class Screen extends JFrame {
     private final ButtonGroup buttonGroup = new ButtonGroup();
     private final ButtonGroup buttonGroup_1 = new ButtonGroup();
     private JTextArea textArea;
+    private ArrayList<JCheckBox> addOns;
     
     static void saglabat(String textArea) {
         try {
@@ -203,42 +205,49 @@ public class Screen extends JFrame {
         lblNewLabel_1.setBackground(Color.LIGHT_GRAY);
         lblNewLabel_1.setBounds(10, 172, 161, 23);
         contentPane.add(lblNewLabel_1);
+         
+        addOns = new ArrayList<>();
 
         exSiers = new JCheckBox("Extra Siers - 1,30");
         exSiers.setFont(new Font("Sylfaen", Font.PLAIN, 13));
         exSiers.setBackground(Color.LIGHT_GRAY);
         exSiers.setBounds(10, 193, 142, 23);
         contentPane.add(exSiers);
+        addOns.add(exSiers); 
 
         exMerce = new JCheckBox("Extra Mērce - 1,00");
         exMerce.setFont(new Font("Sylfaen", Font.PLAIN, 13));
         exMerce.setBackground(Color.LIGHT_GRAY);
         exMerce.setBounds(10, 219, 142, 23);
         contentPane.add(exMerce);
+        addOns.add(exMerce); 
 
         exPiedev = new JCheckBox("Extra Piedevas - 1,50");
         exPiedev.setFont(new Font("Sylfaen", Font.PLAIN, 13));
         exPiedev.setBackground(Color.LIGHT_GRAY);
         exPiedev.setBounds(10, 245, 142, 23);
         contentPane.add(exPiedev);
+        addOns.add(exPiedev); 
 
         exPepsi = new JCheckBox("Pepsi 1L - 1.80");
         exPepsi.setFont(new Font("Sylfaen", Font.PLAIN, 13));
         exPepsi.setBackground(Color.LIGHT_GRAY);
         exPepsi.setBounds(168, 193, 120, 23);
         contentPane.add(exPepsi);
+        addOns.add(exPepsi); 
 
         exFanta = new JCheckBox("Fanta 1L - 1.80");
         exFanta.setFont(new Font("Sylfaen", Font.PLAIN, 13));
         exFanta.setBackground(Color.LIGHT_GRAY);
         exFanta.setBounds(168, 219, 120, 23);
         contentPane.add(exFanta);
-
+        addOns.add(exFanta);  
         exSprite = new JCheckBox("Sprite 1L - 1.80");
         exSprite.setFont(new Font("Sylfaen", Font.PLAIN, 13));
         exSprite.setBackground(Color.LIGHT_GRAY);
         exSprite.setBounds(168, 245, 120, 23);
         contentPane.add(exSprite);
+        addOns.add(exSprite);
 
         JLabel lblNewLabel_1_1_1 = new JLabel("Izvēlies:");
         lblNewLabel_1_1_1.setFont(new Font("Sylfaen", Font.PLAIN, 13));
@@ -414,26 +423,13 @@ public class Screen extends JFrame {
     }
     private double addOnPrice() {
         double addOnPrice = 0.00;
-
-        if (exSiers.isSelected()) {
-            addOnPrice += 1.30;
+        for (JCheckBox addOn : addOns) {
+            if (addOn.isSelected()) {
+                String text = addOn.getText();
+                String priceText = text.substring(text.lastIndexOf('-') + 1).trim();
+                addOnPrice += Double.parseDouble(priceText.replace(',', '.'));
+            }
         }
-        if (exMerce.isSelected()) {
-            addOnPrice += 1.00;
-        }
-        if (exPiedev.isSelected()) {
-            addOnPrice += 1.50;
-        }
-        if (exPepsi.isSelected()) {
-            addOnPrice += 1.80;
-        }
-        if (exFanta.isSelected()) {
-            addOnPrice += 1.80;
-        }
-        if (exSprite.isSelected()) {
-            addOnPrice += 1.80;
-        }
-
         return addOnPrice;
     }
     private String lielumsPica() {
