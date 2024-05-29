@@ -88,19 +88,19 @@ public class Ordering extends JFrame {
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String name = vards.getText().trim();
-                String surname = adrese.getText().trim();
+                String address = adrese.getText().trim();
 
-                
-                if (!name.isEmpty() && !surname.isEmpty()) {
-                 
-                    Screen screen = new Screen();
+                if (!name.isEmpty() && !address.isEmpty()) {
+                    // Pass client details to Screen class
+                    Screen screen = new Screen(name, address);
                     screen.setVisible(true);
-                    dispose(); 
+                    dispose();
                 } else {
                     JOptionPane.showMessageDialog(Ordering.this, "Lūdzu, aizpildi visus lodziņus lai pasūtītu.");
                 }
             }
         });
+
 
         // Pārbauda vai visas ailes ir aizpildītas
         vards.getDocument().addDocumentListener(new CustomDocumentListener());

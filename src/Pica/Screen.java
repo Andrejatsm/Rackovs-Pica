@@ -62,6 +62,8 @@ public class Screen extends JFrame {
     private final ButtonGroup buttonGroup_1 = new ButtonGroup();
     private JTextArea textArea;
     private ArrayList<JCheckBox> addOns;
+    private static String clientName;
+    private static String clientAddress;
     
     static void saglabat(String textArea) {
         try {
@@ -71,6 +73,7 @@ public class Screen extends JFrame {
             pw.close();
             JOptionPane.showMessageDialog(null, "Ceks saglabāts failā Ceks.txt", "Paziņojums", JOptionPane.INFORMATION_MESSAGE);
         } catch (IOException e) {
+            
             JOptionPane.showMessageDialog(null, "Radās kļūda saglabājot failā! ", "Kļūda", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -100,7 +103,7 @@ public class Screen extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    Screen frame = new Screen();
+                    Screen frame = new Screen(clientAddress, clientName);
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -112,7 +115,9 @@ public class Screen extends JFrame {
     /**
      * Create the frame.
      */
-    public Screen() {
+    public Screen(String name, String address) {
+    	this.clientName = name;
+        this.clientAddress = address;
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowOpened(WindowEvent e) {
@@ -497,6 +502,10 @@ public class Screen extends JFrame {
             JOptionPane.showMessageDialog(null, "Lūdzu, izvēlieties picas veidu!", "Kļūda", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        if (qty <= 0) {
+            JOptionPane.showMessageDialog(null, "Nevar pasūtīt 0 picas.", "Kļūda", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         
         if (!maza.isSelected() && !videja.isSelected() && !liela.isSelected()) {
             JOptionPane.showMessageDialog(null, "Lūdzu, izvēlieties picas izmēru!", "Kļūda", JOptionPane.ERROR_MESSAGE);
@@ -515,7 +524,7 @@ public class Screen extends JFrame {
         String roundedKopa = df.format(Kopa);
 
         if (textArea != null) {
-            textArea.setText("\nGarša: \t" + garsa.getSelectedItem() + "\n\nLielums: \t" + lielumsPica() + "\n\nCena: \t\t" + cenaPica() + "\n\nPiedevas: \t" + addOnPrice() +
+            textArea.setText("Pircejs: "+ clientName + " Adrese: "+clientAddress +"\nGarša: \t" + garsa.getSelectedItem() + "\n\nLielums: \t" + lielumsPica() + "\n\nCena: \t\t" + cenaPica() + "\n\nPiedevas: \t" + addOnPrice() +
                 "\n\nServiss: \t" + servicaMetode() + "\n\nDaudzums: \t\t" + "x" + daudzums + "\n\n*******************************************************************************************************" +
                 "\n\nCena Kopa: \t\t" + roundedKopa + " Eiro");
         }
